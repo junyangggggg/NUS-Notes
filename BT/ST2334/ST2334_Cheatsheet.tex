@@ -1,0 +1,533 @@
+\documentclass[a4paper,1pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[a4paper, landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+\usepackage{soul} %for highlight
+\usepackage{xcolor} %color definition
+\usepackage{sectsty} %change section color
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+
+\pdfinfo{
+  /Title (ST2334 cheatsheet.pdf)
+  /Creator (Jun Yang)
+  /Subject (Probability and Statistics)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.2in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=.5cm,left=.5cm,right=.5cm,bottom=.5cm} }
+        {\geometry{top=.2cm,left=.2cm,right=.2cm,bottom=.2cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries\color{red}}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries\color{blue}}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries\color{violet}}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\underline{Set Operations}
+\begin{enumerate}
+\item Mutually exclusive/disjoint : $A \cap B = \varnothing$
+\item $A \subset B \Rightarrow A\subseteq B$
+\item $A \cap A' = \varnothing$
+\item $A \cup A' = S$
+\item $A\cap \varnothing = \varnothing$
+\item $(A')' = A$
+\item $A\cup (B\cap C) = (A\cup B)\cap (A\cup C)$
+\item $A\cap (B\cup C) = (A\cap B)\cup (A\cap C)$
+\item $A\cup B = A \cup (B\cap A')$
+\item $A = (A\cap B)\cup (A\cap B')$
+\item $(A_1 \cup A_2 \cup ... \cup A_n)' = A_1' \cap A_2'... \cap A_n'$
+\item $(A_1 \cap A_2 \cap ... \cap A_n)' = A_1' \cup A_2'... \cup A_n'$
+\end{enumerate}
+
+\underline{Counting Methods}
+\begin{enumerate}
+\item $P_r^n = \frac{n!}{(n-r)!}=n(n-1)(n-2)...(n-(r-1))$
+\item $\binom{n}{r} =\binom{n}{n-r}= \frac{n!}{r!(n-r)!}$
+\end{enumerate}
+
+\underline{Probability}
+\begin{enumerate}
+\item $0 \leq P(A) \leq 1$
+\item $P(S) = 1$
+\item $A\cap B = \varnothing \Rightarrow P(A\cup B) = P(A) + P(B)$
+\item $P(\varnothing) = 0$
+\item $P(A') = 1 - P(A)$
+\item $P(A) = P(A\cap B) + P(A\cap B')$
+\item $P(A\cup B) = P(A) + P(B) - P(A\cap B)$
+\item $P(A\cap B) = 0 \nRightarrow A \cap B = 0$
+\item $A \subset B \Rightarrow P(A) \leq P(B)$
+\end{enumerate}
+
+\underline{Conditional Probability}
+\begin{enumerate}
+\item $P(B|A) = \frac{P(A\cap B)}{P(A)}$
+\item $P(A\cap B) = P(A)P(B|A)$
+\item $P(A|B) = \frac{P(A)P(B|A)}{P(B)}$
+\end{enumerate}
+
+\underline{Independence}
+\begin{enumerate}
+\item $A \perp B \Leftrightarrow P(A)P(B) \Leftrightarrow P(B|A) = P(B)$
+\end{enumerate}
+
+\underline{Law of Total Probability}
+\begin{enumerate}
+\item $P(B) = \sum_{i=1}^n P(B\cap A_i) = \sum_{i=1}^n P(A_i)P(B|A_i)$
+\item $P(B) = P(A)P(B|A) + P(A')P(B|A')$
+\end{enumerate}
+
+\underline{Bayes' Theorem}
+\begin{enumerate}
+\item $P(A_k|B) = \frac{P(A_k)P(B|A_k)}{\sum_{i=1}^n P(A_i)P(B|A_k)}$
+\item $P(A|B) = \frac{P(A)P(B|A)}{P(A)P(B|A)+P(A')P(B|A')}$
+\end{enumerate}
+
+\underline{PMF}
+\begin{enumerate}
+\item $f(x_i) \geq 0, \forall x_i \in R_X$
+\item $f(x) = 0, \forall x \notin R_X$
+\item $sum_{i=1}^\infty f(x_i) = 1$
+\end{enumerate}
+
+\underline{PDF}
+\begin{enumerate}
+    \item $f(x) \geq 0, \forall x_i \in R_X$ and $f(x) = 0, \forall x \notin R_X$
+    \item $\int_{R_x} f(x) dx = 1$
+    \item $P(a \leq X \leq b) = \int_a^b f(x) dx$
+\end{enumerate}
+
+\underline{Discrete CDF}
+\begin{enumerate}
+    \item $F(x) = \sum f(t) = \sum P(X=t)$
+    \item $P(a \leq X \leq b) = P(X \leq b) - P(X < a) = F(b) - F(a-)$
+    \item $a-$ := largest value in $R_X$ that is smaller than $a$
+\end{enumerate}
+
+\underline{Continuous CDF}
+\begin{enumerate}
+    \item $F(x) = \int_{-\infty}^x f(t) dt$
+    \item $f(x) = \frac{dF(x)}{dx}$
+    \item $P(a \leq X \leq b) = P(a < X < b) = F(b) - F(a)$
+\end{enumerate}
+
+\underline{Remarks on CDF}
+\begin{enumerate}
+    \item $F(x)$ is non-decreasing
+    \item CDF and PDF/PMF have one-to-one correspondence
+    \item $0 \leq F(x) \leq 1$
+    \item for discrete, $0 \leq f(x) \leq 1$
+    \item for continuous, $f(x) \geq 0$, but not necessary that $f(x) \leq 1$
+\end{enumerate}
+
+\underline{Expectation}
+\begin{enumerate}
+    \item Discrete: $E(X) = \sum x_i f(x_i)$
+    \item Continuous: $E(X) = \int_{R_X} xf(x) dx$
+    \item $E(aX+b) = aE(X) + b$
+    \item $E(X+Y) = E(X) + E(Y)$
+    \item Discrete: $E[g(x)] = \sum g(x)f(x)$
+    \item Continuous: $E[g(x)] = \int_{R_X} g(x)f(x) dx$
+\end{enumerate}
+
+\underline{Variance}
+\begin{enumerate}
+    \item $\sigma_X^2 = V(X) = E(X-\mu_X)^2$
+    \item Discrete: $V(X) = \sum (X-\mu_X)^2f(x)$
+    \item Continuous: $V(X) = \int_{-\infty}^\infty(X-\mu_X)^2f(x)dx$
+    \item $V(X) \geq 0$
+    \item $V(aX+b) = a^2 V(X)$
+    \item $V(X) = E(X^2) - [E(X)]^2$
+\end{enumerate}
+
+\underline{Discrete Joint Probability Function}
+\begin{enumerate}
+    \item $f_{X,Y}(x,y) = P(X=x, Y=y)$
+    \item $f_{X,Y}(x,y) \geq 0, \forall (x,y) \in R_{X,Y}$
+    \item $f_{X,Y}(x,y) = 0, \forall (x,y) \notin R_{X,Y}$
+    \item $\sum_{i=1}^\infty \sum_{j=1}^\infty f_{X,Y}(x_i, y_j) = \sum_{i=1}^\infty \sum_{j=1}^\infty P(X=x_i, Y=y_j) = 1$
+\end{enumerate}
+
+\underline{Continuous Joint Probability Function}
+\begin{enumerate}
+    \item $P(a\leq X\leq b, c\leq Y \leq d) = \int_a^b \int_c^d f_{X,Y}(x,y)dydx$
+    \item $f_{X,Y}(x,y) \geq 0, \forall (x,y) \in R_{X,Y}$
+    \item $f_{X,Y}(x,y) = 0, \forall (x,y) \notin R_{X,Y}$
+    \item $\int_{-\infty}^\infty \int_{-\infty}^\infty f_{X,Y}(x,y)dxdy=1$
+\end{enumerate}
+
+\underline{Marginal Probability Distribution}
+\begin{enumerate}
+    \item Discrete: for any $x$, $f_X(x) = \sum_y f_{X,Y}(x,y)$
+    \item Continuous: for any $x$, $f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x,y)dy$
+    \item The intuition is to treat $X$ as fixed variable for the \textbf{marginal probability distribution of X}
+\end{enumerate}
+
+\underline{Conditional Distribution}
+\begin{enumerate}
+    \item \textbf{Conditional probability function of $Y$ given $X=x$} := $f_{Y|X}(y|x) = \frac{f_{X,Y}(x,y)}{f_X (x)}$
+    \item This is the probability function of $Y$ given $x$, hence it fulfills all the properties of a probability function for $Y$
+    \item $f_{X,Y}(x,y) = f_X (x)f_{Y|X}(y|x)$
+    \item $P(Y \leq y|X=x) = \int_{-\infty}^y f_{Y|X}(y|x)dy$
+    \item $E(Y|X=x) = \int_{-\infty}^\infty yf_{Y|X} (y|x) dy$
+\end{enumerate}
+
+\underline{Independent Random Variable}
+\begin{enumerate}
+    \item $f_{X,Y} (x, y) = f_X (x) f_Y (y)$
+    \item for any $x \in R_X$ and any $y \in R_Y$, $f_{X,Y} (x, y) = f_X (x) f_Y (y) > 0$
+    \item $P(X \leq x; Y \leq y) = P(X \leq x)P(Y\leq y)$
+    \item for arbitrary functions $g_1(\cdot)$ and $g_2(\cdot)$, $g_1(X) \perp g_2(Y)$
+    \item $f_{X|Y}(x|y) = f_X(x)$
+    \item $X \perp Y$ iff $R_x \perp R_Y$ and $f_{X,Y}(x,y) = C \times g_1(x) \times g_2(y)$
+    \item $f_X(x) = \frac{g_1(x)}{\sum_{t\in R_X} g_1(t)}$
+    \item $f_X(x) = \frac{g_1(x)}{\int_{t\in R_X} g_1(t)dt}$
+\end{enumerate}
+
+\underline{Expectation and Covariance}
+\begin{enumerate}
+    \item $E(g(X,Y)) = \sum_x \sum_y g(x,y) f_{X,Y}(x,y)$
+    \item $E(g(X,Y)) = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x,y) f_{X,Y}(x,y)dy\ dx$
+    \item $cov(X,Y) = E(XY) - E(X)E(Y)$
+    \item $X \perp Y \Rightarrow cov(X,Y) = 0$
+    \item $cov(X,Y) \nRightarrow X \perp Y$
+    \item $cov(aX + b, cY + d) = ac\cdot cov(X,Y)$
+    \item $V(aX+bY) = a^2V(X) + b^2V(Y) + 2ab\cdot cov(X,Y)$
+\end{enumerate}
+
+\underline{Discrete Uniform Distribution}
+\begin{equation*}
+f_X(x)=
+    \begin{cases}
+        \frac{1}{k} & x = x_1, \ldots x_k\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+$$E(X) = \frac{1}{k}\sum_{i=1}^k x_i, \quad \sigma_X^2 = \frac{1}{k}\sum_{i=1}^k x_i - \mu_X^2$$
+
+\underline{Bernoulli Random Variable}\\
+Let $X$ be the number of success in a Bernoulli trial. Then $X$ has only two possible values: 1 or 0
+$$X \sim \text{Bernoulli}(p)$$
+$$f_X(x) = p^x (1-p)^{1-x},\ \text{for}\ x = 0,\ 1$$
+$$\mu_X = p; \quad \sigma_X^2 = pq$$
+
+
+\underline{Binomial Distribution}\\
+Counts the number of successes in $n$ trials of a Bernoulli Process.
+$$X \sim \text{Binom}(n,p)$$
+$$P(X=x) = \binom{n}{x} p^x (1-p)^{n-x},\ \text{for}\ x = 0,\ 1\ldots ,\ n$$
+$$E(X) = np; \quad V(X) = npq$$
+
+\underline{Negative Binomial Distribution}\\
+Numbers of Bernoulli trials needed until the $kth$ success occurs
+$$X \sim \text{NB}(k,p)$$
+$$P(X=x) = \binom{x-1}{k-1} p^k (1-p)^{x-k},\ \text{for}\ x = k,\ k+1,\ \ldots$$
+$$E(X) = \frac{k}{p}; \quad V(X) = \frac{(1-p)k}{p^2}$$
+
+\underline{Geometric Distribution}\\
+Number of iid Bernoulli tirals needed until the first success occurs.
+$$X \sim \text{Geom}(p)$$
+$$P(X=x) = p (1-p)^{x-1}$$
+$$E(X) = \frac{1}{p}; \quad V(X) = \frac{(1-p)}{p^2}$$
+
+\underline{Poisson Distribution}\\
+Number of events occurring in a fixed period of time or fixed region.
+$$X \sim \text{Poisson}(\lambda)$$
+$$P(X=x) = \frac{e^{-\lambda}\lambda^k}{k!}$$
+$$E(X) = \lambda; \quad V(X) = \lambda$$
+
+\underline{Poisson Approximation to Binomial}\\
+Let $X\sim \text{Binom}(n,p)$. If $n \rightarrow \infty$ and $p\rightarrow 0$ s.t. $\lambda = np$, then $X\sim \text{Poisson}(np)$
+$$\lim_{p \to 0;n\to \infty} P(X=x) = \frac{e^{-np}(np)^x}{x!}$$
+$$n\geq 20 \text{ and } p \leq 0.05 \text{ or } n \geq 100 \text{ and } np\leq 10$$
+
+\underline{Continuous Uniform Distribution}
+$$X\sim U(a,b)$$
+\begin{equation*}
+f_X(x)=
+    \begin{cases}
+        \frac{1}{b-1} & a\leq x \leq b\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+$$E(X) = \frac{a+b}{2}, \quad V(X) = \frac{(b-a)^2}{12}$$
+
+\begin{equation*}
+F_X(x)=
+    \begin{cases}
+        0 & x < a \\
+        \frac{x-a}{b-a} & a\leq x \leq b\\
+        1 & x > b
+    \end{cases}
+\end{equation*}
+
+\underline{Exponential Distribution}\\
+Often used to model waiting time to the first success in continuous time.
+$$X\sim \text{Exp}(\lambda)$$
+\begin{equation*}
+f_X(x)=
+    \begin{cases}
+        \lambda e^{-\lambda x} & x \geq 0\\
+        0 & x < 0
+    \end{cases}
+\end{equation*}
+$$E(X) = \frac{1}{\lambda}, \quad V(X) = \frac{1}{\lambda^2}$$
+
+\begin{equation*}
+F_X(x)=
+    \begin{cases}
+        1 - e^{-\lambda x} & x \geq 0\\
+        0 & x < 0
+    \end{cases}
+\end{equation*}
+$$P(X>x) = e^{-\lambda x},\ \text{for } x>0$$
+
+\begin{equation*}
+f_X(x)=
+    \begin{cases}
+        \frac{1}{\mu}e^{-x/\mu} & x \geq 0\\
+        0 & x < 0
+    \end{cases}
+\end{equation*}
+$$E(X) = \mu, \quad V(X) = \mu^2, \quad F_X(x) = 1-e^{-x/\mu}$$
+$$P(X>s+t|X>s) = P(X>t)$$
+
+\underline{Normal Approximation to Binomial}\\
+If $n \rightarrow \infty$ and $p$ remains a constant.
+$$Z = \frac{X-np}{\sqrt{np(1-p)}} \sim N(0,1)$$
+$$np < 5 \text{ and } n(1-p) > 5$$
+
+\underline{Continuity Correction}\\
+Apply continuity correction when approximating the binomial using the normal.
+\begin{enumerate}
+    \item $P(X=k) \approx P(k-1/2 < X < k + 1/2)$
+    \item $P(a \leq X \leq b) \approx P(a-1/2 < X < b + 1/2)$
+    \item $P(a < X \leq b) \approx P(a+1/2 < X < b + 1/2)$
+    \item $P(a \leq X < b) \approx P(a-1/2 < X < b - 1/2)$
+    \item $P(a < X < b) \approx P(a+1/2 < X < b - 1/2)$
+    \item $P(X\leq c) = P(0 \leq X \leq c) \approx P(-1/2 < X < c + 1/2)$
+    \item $P(X > c) = P(c < X \leq n) \approx P(c+1/2 < X < n + 1/2)$
+\end{enumerate}
+
+Sample mean: $\Bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$\\
+Sample variance: $x^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \Bar{x})^2$\\
+$$\mu_{\Bar{X}} = E(\Bar{X}), \quad \sigma_{\Bar{X}}^2 = V(\Bar{X}) = \frac{\sigma_X^2}{n}$$
+
+\underline{$\chi^2$ Distribution}\\
+Let $Z_1, \ldots, Z_n$ be $n$ iid standard normal RV, An RV with the same distribution as $Z_1^2 + \cdots + Z_n^2$ is a $\chi^2$ RV with $n$ dof.
+\begin{enumerate}
+    \item $Y\sim \chi^2(n)$
+    \item $E(Y) = n$ and $V(Y) = 2n$
+    \item For large $n$, $\chi^2(n)$ is approximately $N(n,2n)$
+    \item If $Y_1$ and $Y_2$ are $\chi^2$ RV with $m$ and $n$ dof respectively, then $Y_1+Y_2$ is a $\chi^2$ RV with $m+n$ dof
+    \item $\frac{(n-1)S^2}{\sigma^2} = \frac{\sum_{i=1}^n (X_i - \Bar{X})^2}{\sigma^2}$ has a $\chi^2$ dist with $n-1$ dof
+\end{enumerate}
+
+\underline{$t$-Distribution}\\
+Suppose $Z \sim N(0,1)$ and $U\sim \chi^2(n)$. If $Z\perp U$, then
+$$T = \frac{Z}{\sqrt{U/n}}$$
+follows the t-distribution with $n$ dof
+\begin{enumerate}
+    \item If $n\rightarrow\infty$, t-dist approaches $N(0,1)$. When $n\geq 30$, we can replace it by $N(0,1)$.
+    \item If $T\sim t(n)$, then $E(T) = 0$ and $V(T) = n/(n-2)$ for $n>2$
+\end{enumerate}
+
+If $X_1, \ldots,X_n$ are iid normal RV with mean $\mu$ and variance $\sigma^2$, then
+$$\frac{\Bar{X}-\mu}{S/\sqrt{n}}$$
+follows a t-dist. with $n-1$ dof
+
+\underline{$F$-Distribution}\\
+Suppose $U\sim \chi^2(m) \perp V\sim \chi^2(n)$, then the distribution of the RV
+$$F = \frac{U/m}{V/n}$$
+is a F-distribution with $(m,n)$ dof
+\begin{enumerate}
+    \item $E(X) = \frac{n}{n-2}$
+    \item $V(X) = \frac{2n^2(m+n-2)}{m(n-2)^2(n-4)}$
+    \item If $F\sim F(n,m)$ then $1/F \sim F(m,n)$
+    \item $F(m,n;1-\alpha) = 1/F(n,m;\alpha)$
+\end{enumerate}
+
+Suppose that random samples of sizes $n_1$ and $n_2$ are selected from two normal populations with variances $\sigma_1^2$ and $\sigma_1^2$ respectively.
+$$U = \frac{(n_1-1)S_1^2}{\sigma_1^2}\sim \chi^2(n_1-1)$$
+$$V = \frac{(n_2-1)S_2^2}{\sigma_2^2}\sim \chi^2(n_2-1)$$
+Therefore we have
+$$F = \frac{U/(n_1-1)}{V/(n_2-1)} = \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n_1-1, n_2-1)$$
+
+\underline{Maximum Error of Estimate}
+$$E = z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$$
+$$P(\frac{|\Bar{X}-\mu|}{\sigma/\sqrt{n}} \leq z_{\alpha/2}) = P(|\Bar{X}-\mu| \leq z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}) = 1-\alpha$$
+$$n\geq (\frac{z_{\alpha/2}\cdot \sigma}{E_0})^2$$
+
+\begin{tabular}{ | m{1cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} | } 
+  \hline
+  Population & $\sigma$ & $n$ & Statistic & E \\ 
+  \hline
+  Normal & known & any & $Z = \frac{\Bar{X}-\mu}{\sigma/\sqrt{n}}$ & $z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$ \\ 
+  \hline
+  any & known & large & $Z = \frac{\Bar{X}-\mu}{\sigma/\sqrt{n}}$ & $z_{\alpha/2}\cdot \frac{\sigma}{\sqrt{n}}$ \\ 
+  \hline
+    Normal & unknown & small & $T = \frac{\Bar{X}-\mu}{S/\sqrt{n}}$ & $t_{n-1;\alpha/2}\cdot \frac{S}{\sqrt{n}}$ \\ 
+    \hline
+      any & unknown & large & $Z = \frac{\Bar{X}-\mu}{S/\sqrt{n}}$ & $z_{\alpha/2}\cdot \frac{S}{\sqrt{n}}$ \\ 
+      \hline
+\end{tabular}
+
+\underline{Independent Samples (Known and Unequal Variances)}\\
+If two populations are normal OR both samples are large,
+$$Z = \frac{(\Bar{X}-\Bar{Y}) - (\mu_1 - \mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}$$
+$$(\Bar{X} - \Bar{Y}) \pm z_{\alpha/2}\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}$$
+
+\underline{Independent Samples (Large, Unknown and Unequal Variances)}\\
+$$S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \Bar{X})^2$$
+$$Z = \frac{(\Bar{X}-\Bar{Y}) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}$$
+$$(\Bar{X} - \Bar{Y}) \pm z_{\alpha/2}\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}$$
+
+\underline{Independent Samples (Small, Unknown but Equal Variances)}\\
+Assume equal variances if $1/2 \leq S_1/S_2 \leq 2$
+$$S_p^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2}$$
+$$T = \frac{(\Bar{X}-\Bar{Y}) - (\mu_1 - \mu_2)}{S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\sim t_{n_1+n_2-2}$$
+$$(\Bar{X} - \Bar{Y}) \pm t_{n_1+n_2-2;\alpha/2}S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$$
+
+\underline{Independent Samples (Large, Unknown but Equal Variances)}\\
+$$(\Bar{X} - \Bar{Y}) \pm z_{\alpha/2}S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$$
+
+\underline{Paired Data}\\
+\begin{itemize}
+    \item $X_i$ and $Y_i$ are dependent
+    \item $(X_i, Y_i)$ and $(X_j, Y_j)$ are independent for any $i\neq j$
+    \item Define $D_i = X_i - Y_i$, $\mu_D = \mu_1 - \mu_2$
+\end{itemize}
+$$T = \frac{\Bar{D}-\mu_D}{S_D/\sqrt{n}}$$
+$$\Bar{D} = \frac{\sum_{i=1}^n D_i}{n}, \quad S_D^2 = \frac{\sum_{i=1}^n (D_i - \Bar{D})^2}{n-1}$$
+If $n < 30$, $T\sim t_{n-1}$, CI = $\Bar{d} \pm t_{n-1;\alpha/2}\cdot\frac{S_D}{\sqrt{n}}$\\
+If $n \geq 30$, $T\sim N(0,1)$, CI = $\Bar{d} \pm z_{\alpha/2}\cdot\frac{S_D}{\sqrt{n}}$
+
+\underline{Type I \& Type II Error}
+\begin{itemize}
+    \item Type I Error: ejecting $H_0$ when $H_0$is True
+    \item type II Error: Not rejecting $H_0$ when $H_0$ is False
+    \item $\alpha = P(Type\ I\ Error) = P(Reject\ H_0|H_0\ is\ true)$
+    \item $\beta = P(Type\ II\ Error) = P(Do\ Not\ Reject\ H_0|H_0\ is\ false)$
+    \item Power of the test: 1-$\beta$ = P(Reject $H_0$|$H_0$ is false)
+\end{itemize}
+
+\underline{Hypothesis Test: Known Variance}\\
+\begin{itemize}
+    \item population variance $\sigma^2$ is known
+    \item underlying distribution is normal
+    \item $n$ is large
+\end{itemize}
+Test statistics:
+$$Z=\frac{\Bar{X}-\mu_0}{\sigma/\sqrt{n}}\sim N(0,1)$$
+
+\underline{Hypothesis Test: Unknown Variance}\\
+\begin{itemize}
+    \item population variance $\sigma^2$ is unknown
+    \item underlying distribution is normal
+\end{itemize}
+Test statistics:
+$$T=\frac{\Bar{X}-\mu_0}{S/\sqrt{n}}\sim t_{n-1}$$
+when $n \geq 30$, we can replace $t_{n-1}$ by $Z$
+
+\underline{Independent Samples}
+\begin{enumerate}
+    \item 
+        \begin{itemize}
+            \item $\sigma_1^2$ and $\sigma_2^2$ are known
+            \item $n_1$ and $n_2$ are large
+        \end{itemize}
+        $$Z = \frac{(\Bar{X}-\Bar{Y}) - \delta_0}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}\sim N(0,1)$$
+
+    \item 
+        \begin{itemize}
+            \item $\sigma_1^2$ and $\sigma_2^2$ are unknown
+            \item $n_1$ and $n_2$ are large
+        \end{itemize}
+        $$Z = \frac{(\Bar{X}-\Bar{Y}) - \delta_0}{\sqrt{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}}\sim N(0,1)$$
+
+    \item 
+        \begin{itemize}
+            \item $\sigma_1^2$ and $\sigma_2^2$ are unknown but equal
+            \item underlying distribution is normal
+            \item $n_1$ and $n_2$ are small
+        \end{itemize}
+        $$Z = \frac{(\Bar{X}-\Bar{Y}) - \delta_0}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}\sim t_{n_1+n_2-2}$$
+\end{enumerate}
+
+\underline{Paired Data}
+$$T = \frac{\Bar{D}-\mu_{D_0}}{S_D/\sqrt{n}}$$
+If n < 30 and the population is normally distributed, then
+$$T\sim t_{n-1}$$
+If n $\geq$ 30, then
+$$T\sim N(0,1)$$
+
+\underline{Inequalities and Absolute Values}
+\begin{enumerate}
+    \item $|x| < a \Longleftrightarrow -a < x < a$
+    \item $|x| > a \Longleftrightarrow x < -a \text{ or } x > a$
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\end{multicols}
+\end{document}
