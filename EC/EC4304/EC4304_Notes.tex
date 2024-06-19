@@ -11,6 +11,10 @@
 
 \maketitle
 
+\tableofcontents
+
+\pagebreak
+
 \section{Introduction to Forecasting}
 In general, we wish to forecast the distribution of a random variable $F(y) = P(Y \leq y)$. However, a point forecast $\hat{Y}$ is more desirable because it  is our best guess for the unknown value. $\hat{Y}$ is a function of the predictive distribution $F(y)$. The function depends on the \textbf{loss function}.
 
@@ -518,16 +522,16 @@ In summary, in 1-step-ahead time series models where errors are unforecastable, 
 In some models, we would expect errors to be correlated. Then classical and robust SE estimates will not be appropriate.\\
 \\
 Define the adjustment factor:
-$$f_T = \frac{Var(\sum_{t=1}^T v_t)}{TVar(v_t)}$$
+$$f_T = \frac{Var\left(\sum_{t=1}^T v_t\right)}{TVar(v_t)}$$
 The general formula becomes:
 $$AVar(\hat{\beta}) = \frac{Var(v_t)}{TVar(X_t)^2}f_T$$
 If $v_t$ are uncorrelated, then $f_T = 1$. Otherwise it adjusts for serial correlation.\\
 \\
 Intuition: If $v_t$ correlated, $Var(\sum_{t=1}^T v_t) > TVar(v_t)$ becasue of covariance term. Thus, $f_T > 1 \Rightarrow AVar(\hat{\beta})$ increases.
 
-$$f_T = \frac{1}{T}\sum_{t=1}^T \sum_{s=1}^T \rho (t-s) = 1 + 2\sum_{s=1}^{T-1} (\frac{T-s}{T})\rho (s)$$
+$$f_T = \frac{1}{T}\sum_{t=1}^T \sum_{s=1}^T \rho (t-s) = 1 + 2\sum_{s=1}^{T-1} \left(\frac{T-s}{T}\right)\rho (s)$$
 As T grows large, we have:
-$$f_T = 1 + 2\sum_{s=1}^{T-1} (\frac{T-s}{T})\rho (s) \longrightarrow 1 + 2\sum_{s=1}^\infty \rho (s) = f$$
+$$f_T = 1 + 2\sum_{s=1}^{T-1} \left(\frac{T-s}{T}\right)\rho (s) \longrightarrow 1 + 2\sum_{s=1}^\infty \rho (s) = f$$
 $$AVar(\hat{\beta}) = \frac{Var(v_t)}{TVar(X_t)^2}f$$
 
 \subsection{HAC Standard Errors}
@@ -540,7 +544,7 @@ However, this will sometimes deliver negative variance estimates (since $\hat{\r
 
 \subsubsection{Weighted HAC Estimator (Newey-West)}
 Choose a truncation parameter $m$, but smooth the sum using weights:
-$$\hat{f} = 1 + 2\sum_{s=1}^m (\frac{m-s}{m}) \hat{\rho} (s)$$
+$$\hat{f} = 1 + 2\sum_{s=1}^m \left(\frac{m-s}{m}\right) \hat{\rho} (s)$$
 The estimator always stays non-negative.\\
 \\
 How to choose $m$?
@@ -577,8 +581,8 @@ $adjusted-R^2$ gives not enough penalty.\\
 We can use sequential t-tests or sequential F-tests to choose variables. But it is not designed to select best forecast model and can perform badly. Usually, F-tests are preferred to t-tests in presence of high correlation among regressors (imperfect multicollinearity).
 
 \subsection{BIC}
-$$P(M_1|D) \propto exp(-\frac{BIC}{2})$$
-$$BIC = Tln(\frac{SSR}{T}) + kln(T)$$
+$$P(M_1|D) \propto exp\left(-\frac{BIC}{2}\right)$$
+$$BIC = Tln\left(\frac{SSR}{T}\right) + kln(T)$$
 The model with the smallest BIC is the model that is most likely to be true.\\
 \\
 BIC models have consistency property. However, BIC selection is not specifically designed to produce a good forecast.\\
@@ -586,7 +590,7 @@ BIC models have consistency property. However, BIC selection is not specifically
 BIC assumes conditional homoskedasticity.
 
 \subsection{AIC}
-$$AIC = Tln(\frac{SSR}{T}) + 2k$$
+$$AIC = Tln\left(\frac{SSR}{T}\right) + 2k$$
 We can see that BIC put a harsher penalty on model size.\\
 \\
 AIC is an approximately unbiased estimate of the MSFE. Hence, AIC is designed to makes the best forecast. Unlike BIC, AIC is not consistent, but it will asymptotically pick the best forecasting model.\\
@@ -676,21 +680,21 @@ We need to use a constrained regression:
 \end{enumerate}
 
 \subsection{Bayesian Model Averaging}
-$$P(M|D) \propto exp(-\frac{BIC}{2})$$
+$$P(M|D) \propto exp\left(-\frac{BIC}{2}\right)$$
 These probabilities can be used to form forecast weights.
-$$w_m^* = exp(-\frac{BIC_m}{2})$$
+$$w_m^* = exp\left(-\frac{BIC_m}{2}\right)$$
 $$w_m = \frac{w_m^*}{\sum_{m=1}^M w_m^*}$$
 If one model is more likely to be the true model, then its forecast receives more weights.\\
 \\
 However, using BIC to compute weights can lead to extremely large values. It is common to adjust it for computation. Let $\Delta BIC_m = (BIC_m - BIC^*)$ be the BIC difference between that of model $m$ and the best one. Then
-$$w_m^* = exp(-\frac{\Delta BIC_m}{2})$$
+$$w_m^* = exp\left(-\frac{\Delta BIC_m}{2}\right)$$
 $$w_m = \frac{w_m^*}{\sum_{m=1}^M w_m^*}$$
 This will be more numerically stable.
 
 \subsection{Weighted AIC}
-$$w_m \propto exp(-\frac{AIC}{2})$$
+$$w_m \propto exp\left(-\frac{AIC}{2}\right)$$
 There is no strong theory for this but it is common in practice. We can do the same thing in BMA here
-$$w_m^* = exp(-\frac{\Delta AIC_m}{2})$$
+$$w_m^* = exp\left(-\frac{\Delta AIC_m}{2}\right)$$
 $$w_m = \frac{w_m^*}{\sum_{m=1}^M w_m^*}$$
 If criteria differ, BMA and WAIC will give different weights to different models. Weights will go to zero for models sufficiently different from the best (AIC/BIC difference of 10 and above).
 
@@ -817,7 +821,7 @@ Typically, RV is computed using 5-minute returns.
 
 \subsection{QLIKE Loss Function}
 QLIKE loss function is applicale only for strictly positive random variables.
-$$OLIKE = \frac{Y}{\hat{Y}} - log(\frac{Y}{\hat{Y}}) - 1$$
+$$OLIKE = \frac{Y}{\hat{Y}} - log\left(\frac{Y}{\hat{Y}}\right) - 1$$
 $Y$ is the proxy for true variance, $\hat{Y}$ is the variance forecast.
 
 \subsection{Robust Regression}
@@ -875,5 +879,49 @@ If $Y$ and $X$ are both I(1) and cointegrated, then the optimal regression for m
 $$\Delta Y_t = \alpha + \rho Z_{t-1} + \beta_1 \Delta Y_{t-1} + ... + \beta_p \Delta Y_{t-p} + \phi_1 \Delta X_{t-1} + ... + \phi_q \Delta X_{t-q} + \epsilon_t$$
 $$Z_t = Y_t - \theta X_t$$
 This is a dynamic regression in differences augmented with the error-correction term $Z_{t-1}$.
+
+
+
+\section{How to Do a Time Series Forecasting Project}
+\begin{enumerate}
+    \item Plot the graph. Model trend using different fits, choose the one with the lowest AIC.
+    \item Take the residual as the detrended data.
+    \item Plot the graph and model seasonality by including seasonal dummy.
+    \item Take the residual and add back the unconditional mean of the series.
+    \item Use ADF test to test for unit roots. In the meantime, plot the ACF and PACF to confirm the decision of the presence of unit roots.
+    \item If there is unit root, difference it.
+    \item Use ACF and PACF to determine the number of lags to be included in ARMA model. Use AIC to determine the best number of lags.
+    \item If doing multiple period ahead forecast, remember to use HAC standard errors. If one-step ahead, we can use robust standard errors. Normally use SW default to choose number of lags in the standard error.
+    \item Identify some leading indicators, construct ADL model and perform the Granger-Causality test to see if one is granger-causing another. 
+        \begin{enumerate}
+            \item Compare the baseline AR model with ADL models with different lags in $X$, use AIC to choose the best ADL model.
+            \item If no ADL model does better than baseline AR model, remove this leading indicator.
+            \item Do the same thing for another leading indicator. 
+            \item Combine useful leading indicators and do the final comparison. 
+        \end{enumerate}
+    \item Use simple averaging, Bates-Granger, Granger-Ramanathan, BMA, WAIC for forecast combination across different models from the previous step.
+        \begin{enumerate}
+            \item Granger-Ramanathan method is recommended, we can include constant term in the regression equation when there is systematic bias in our forecasts.
+        \end{enumerate}
+    \item Plot the residual plot of our model, see if the errors are correlated up to $h-1$ period. We can also use Ljung-Box statistics to test for autocorrelation in residuals.
+        \begin{enumerate}
+            \item Do Mincer-Zarnowitz regression 
+            $$Y_{t+h} = \alpha + \beta \hat{Y}_{t+h|t} + u_t$$ 
+            and perform a joint test of $H_0: \alpha = 0,\ \beta = 1$
+            \item If reject, there is systematic bias in forecast. Can revert to the previous step to get rid of systematic bias.
+        \end{enumerate}
+    \item Use Diebold-Marianmno test to see if one forecast is really different from another forecast. 
+    \item Plot the residual and see if there is any volatility clustering.
+        \begin{enumerate}
+            \item If there is any, we can square the residual, and look for ACF and PACF of the squared residuals to decide the lag for ARCH and GARCH.
+            \item Alternatively, we can use command to detect ARCH effect by using Engle's LM test.
+        \end{enumerate}
+    \item Plot the residual of the ARCH or GARCH model to see if there still exists any autocorrelation in residuals.
+    \item Consider TGARCH, EGARCH, GARCH-in-mean depending on the problem's context.
+    \item Also consider robust regression, HAR model depending on the problem's context.
+    \item Back to Step , 10, 11 , 12 for evaluations.
+
+    
+\end{enumerate}
 
 \end{document}
