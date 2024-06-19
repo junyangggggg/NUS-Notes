@@ -1,0 +1,946 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\setcounter{secnumdepth}{4}
+\usepackage[dvipsnames]{xcolor}
+
+\title{EC4331 Notes}
+\author{Jun Yang Liew}
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\pagebreak
+
+\section{A Classical Monetary Model}
+Assumptions for Classical Model:
+\begin{enumerate}
+    \item Perfect competition in goods and labor markets
+    \item Flexible prices and wages
+    \item No capital accumulation
+    \item No fiscal sector
+    \item Closed economy
+\end{enumerate}
+
+\subsection{Households}
+Representative household solves
+$$\text{max}\ E_0 \sum_{t=0}^{\infty} \beta^t\cdot U(C_t, N_t)$$
+$$\text{s.t.}\ P_t C_t + Q_t B_t \leq B_{t-1} + W_tN_t + D_t$$
+
+Consumers face 2 tradeoffs, $C_t$ vs $N_t$ and $C_t$ vs $C_{t+1}$.\\
+
+Implied optimality conditions:
+\begin{enumerate}
+    \item $C_t$ vs $N_t$ 
+    $$\frac{W_t}{P_t} = C_t^\sigma N_t^\varphi$$
+    $$\Leftrightarrow w_t - p_t = \sigma c_t + \varphi n_t$$
+    This is the labor supply curve function, where LHS is real wage.\\
+    $L_S$ is increasing with $n_t$, if wage is higher, they will give up leisure to earn more (substitution effect).\\
+    
+    If $c_t$ increases, $L_S$ shifts up. At the same level of wage, $n_t$ is lower. This is because consumption increases utility. To remain the same utility level, consumer can work less (wealth effect).
+
+
+    \item $C_t$ vs $C_{t+1}$
+    $$Q_t = \beta E_t \left\{\left(\frac{C_{t+1}}{C_t}\right)^{-\sigma} \frac{P_t}{P_{t+1}} \right\}$$
+    This is the Euler Equation which is Consumers' choice that maximizing utility.\\
+    This equation from a more general form $Q_t = \beta E\left \{\frac{u_{c,t+1}}{u_{c,t}} \frac{P_t}{P_{t+1}}\right \}$, which also implies $u_{c,t} = \beta E\left\{u_{c,t+1} \frac{P_t}{Q_t} \frac{1}{P_{t+1}}\right\}$\\
+
+    From this Euler Equation, we can obtain another representation:
+    $$c_t = E_t(c_{t+1}) - \frac{1}{\sigma}\left[i_t - E_t(\pi_{t+1}) - \rho\right]$$
+    \begin{itemize}
+        \item $c_t$ is positively related to $E_t(c_{t+1})$ and $E_t(\pi_{t+1})$
+        \item $c_t$ is negatively related to $i_t$ and $r_t$ since $r_t = i_t - E_t(\pi_{t+1})$
+        \item This equation shows the relationship between consumption and interest rate
+    \end{itemize}
+    
+    $$i_t = \sigma E_t(c_{t+1} - c_t) + E_t(\pi_{t+1}) + \rho$$
+    \begin{itemize}
+        \item This equation let us know in steady state,, $i = \pi + \rho$ since $E_t(c_{t+1} - c_t) = 0$
+        \item Then in steady state, $i=\pi + \rho$, $r = \rho$\\
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsection{Firms}
+Firms have production function which takes the form:
+$$Y_t = A_t N_t^{1-\alpha}$$
+$$y_t = a_t + (1-\alpha)n_t$$
+Here $a_t$ follows an exogenous stationary process:
+$$a_t = \rho_a a_{t-1} + \varepsilon_t^a$$
+
+In classical model, perfect competitive market is assumed, hence firms can only decide $n_t$, $p_t$ and $w_t$ are taken from the market.\\
+
+Thus, firms solve
+$$\max_{\{N_t\}}\ P_tY_t - W_t N_t$$
+$$\text{s.t. } Y_t = A_tN_t^{1-\alpha}$$
+
+Optimality Condition:
+$$\frac{W_t}{P_t} = (1-\alpha)A_t N_t^{-\alpha}$$
+$$w_t - p_t = log(1-\alpha) + a_t - \alpha n_t$$
+This equation is in the form of real wage = MPL.\\
+\\
+If $a_t$ increases, $L_D$ shifts up because MPL is higher, workers are more productive, hence firms desire more workers.
+
+\subsection{Equilibrium}
+To achieve equilibrium we have 4 conditions:
+\begin{enumerate}
+    \item Goods market clearing: $y_t = c_t$
+    \item Labor market clearing: $L_S = L_D$\\
+    $\sigma c_t + \varphi n_t = a_t - \alpha n_t + log(1-\alpha)$
+    \item Assets market clearing: $B_t = 0$ because we have only 1 representative agent in the economy.\\
+    $r_t = i_t - E_t(\pi_{t+1}) = \rho + \sigma E_t(\Delta c_{t+1})$
+    \item Production function: $y_t = a_t + (1-\alpha)n_t$\\
+\end{enumerate}
+
+Solving the model means we express endogenous variables as a function of exogenous variables. For each endogenous variable, we can find that
+\begin{enumerate}
+    \item $n_t = \psi a_t + \psi_n$
+    \item $y_t = \frac{1+\varphi}{\sigma(1-\alpha) + \varphi + \alpha}a_t$
+    \item $r_t = \rho - \sigma \psi_{ya}(1-\rho_a)a_t$
+    \item $w_t - p_t = \frac{\sigma+\varphi}{\sigma(1-\alpha) + \varphi + \alpha}a_t + \psi_w$\\
+\end{enumerate}
+
+{\color{blue}Discussion}:
+\textcolor{blue}{
+\begin{enumerate}
+    \item Monetary non-neutrality:\\
+    Money is neutral. Because $y_t$, $r_t$, $w_t - p_t$ is independent of $m_t$. Thus, money doesn't affect these real variables
+    \item \textcolor{blue}{$\frac{\partial y_t}{\partial a_t} > 0$, $\frac{\partial w_t}{\partial a_t} > 0$, how about $\frac{\partial n_t}{\partial a_t}$?\\
+    If $a_t$ increases, the productivity is higher, thus the production $y_t = c_t$ will increase. Since $c_t$ increases, HH are less willing to work to maintain the same level of utility (wealth effect). Therefore, $L_S$ shifts left\\
+    \\
+    If wealth effect is small, $n^+ > n$\\
+    If $\sigma$ is big, wealth effect is big, $n^+ < n$\\
+        If $\sigma = 1$, $n^+ = n$}\\
+\end{enumerate}}
+
+\subsection{2 Examples of Monetary Policy}
+\subsubsection{Example 1}
+$$i_t = i + v_t$$
+$$v_t = \rho_v v_{t-1} + \varepsilon_t^v$$
+$$\Rightarrow E_t(\pi_{t+1}) = \rho + \pi + v_t - r_t$$
+$$\Rightarrow E_t(\hat{\pi}_{t+1}) = v_t - \hat{r}_t$$
+$$\Rightarrow \hat{\pi}_{t+1} = v_t - \hat{r}_t + \xi_{t+1}$$
+In this example, CB has nothing to do to counter inflation because $i_t$ follows an exogenous path.
+
+\subsubsection{Example 2}
+$$i_t = \rho + \pi + \phi_\pi (\hat{\pi}_t) + v_t$$
+$$\Rightarrow \phi_\pi \hat{\pi}_t = E_t(\hat{\pi}_{t+1}) + \hat{r}_t - v_t$$
+Let $\hat{\pi}_t > 0$, then inflation is expected, 
+\begin{enumerate}
+    \item $\phi_\pi = 1$: raise $i_t$ by the same level of inflation
+    \item $\phi_\pi > 1$: raise $i_t$ more than $\pi_t$ deviation from $\pi$
+    \item $\phi_\pi < 1$: raise $i_t$ less than $\pi_t$ deviation from $\pi$
+\end{enumerate}
+
+$\phi_\pi$ needs to be greater than 1 to rule out sunspot shock (clear inflation more effectively).\\
+
+\pagebreak
+
+\subsection{Summary}
+\begin{itemize}
+    \item In classical model, the equilibrium condition requires:
+    \begin{enumerate}
+        \item goods market clearing
+        \item labour market clearing
+        \item asset market clearing
+        \item production function
+    \end{enumerate}
+
+    \item Money is neutral, it does not affect $n_t$, $r_t$, $w_t - p_t$.
+    \item Productivity/technology, $a_t$, is the main driver of economy in classical model (supply schock):
+    \begin{enumerate}
+        \item $a_t\uparrow \Rightarrow y_t\uparrow$
+        \item $a_t \uparrow \Rightarrow w_t\uparrow$
+        \item $a_t\uparrow \Rightarrow n_t\uparrow$ if substitution effect dominates
+        \item $a_t\uparrow \Rightarrow n_t\downarrow$ if wealth effect dominates
+        \item $a_t\uparrow \Rightarrow \Bar{n}_t$ if both effects are the same
+    \end{enumerate}
+
+    \item $\phi_\pi > 1$, in the MP rule, to rule out sunspot shock, or to counter inflation more effectively (Taylor Principle).
+\end{itemize}
+
+\pagebreak
+
+\section{New Keynesian Model}
+Assumptions:
+\begin{enumerate}
+    \item The market is monopolistic competition, ie. firms produce different goods
+    \item With probability (1-$\theta$), firms can reset price
+    \item With probability $\theta$, firms cannot reset price
+\end{enumerate}
+
+\subsection{Households}
+HH aggregate consumption level at time $t$ is 
+$$C_t = \left [\int_0^1 (C(j))^{\frac{\varepsilon-1}{\varepsilon}}dj \right]^{\frac{\varepsilon}{\varepsilon - 1}}$$
+
+\begin{itemize}
+    \item $\varepsilon$: elasticity of substitution goods
+    \item If $\varepsilon \rightarrow \infty$, $C_t = \int_0^1 C_j dj$
+    \item This means perfect substitution $\Rightarrow$ perfect competition
+    \item In general, $\varepsilon \uparrow \Rightarrow $ competition $\uparrow \Rightarrow$ markup $\downarrow$
+\end{itemize}
+
+Thus, there is a new optimization problem for HH
+$$\max_{\{C_t(j)\}}\ C_t = \left [\int_0^1 (C(j))^{\frac{\varepsilon-1}{\varepsilon}}dj \right]^{\frac{\varepsilon}{\varepsilon - 1}}$$
+$${\text{s.t.}}\ \int_0^1 P_t(j)\cdot C_t(j) dj = Z_t$$
+
+By doing FOC and some rearrangement, we can achieve the following:
+$$\left(\frac{C_t(i)}{C_t(j)}\right)^{-\frac{1}{\varepsilon}} = \frac{P_t(i)}{P_t(j)}$$
+
+\begin{equation}
+    C_t(i) = \left(\frac{P_t(i)}{P_t}\right)^{-\varepsilon} C_t
+\end{equation}
+\\
+\textcolor{ForestGreen}{Interpretation of (1):}\\
+\textcolor{ForestGreen}{The demand of goods $i$ depends}
+\textcolor{ForestGreen}{
+\begin{enumerate}
+    \item negatively on $P_t(i)$, because people will buy less if it's more expensive
+    \item positively on $P_t$, because goods $i$ is cheaper compared to other goods
+    \item positively on $C_t$, because...\\
+\end{enumerate}
+}
+
+\subsection{Firms}
+\subsubsection{Static Problem}
+Nominal Cost Function:
+$$\Psi (Y) = W\cdot N = W\left(\frac{Y}{A}\right)^{\frac{1}{1-\alpha}}$$
+\\
+Nominal Marginal Cost Function:
+$$\Psi'(Y) = \frac{\partial\ \Psi(Y)}{\partial\ Y} = \frac{1}{1-\alpha}\frac{W}{A}\left(\frac{Y}{A}\right)^{\frac{\alpha}{1-\alpha}}$$
+\\
+Firms' static problem is
+$$\max_{P(j)}\ P(j)\ Y(j) - \Psi(Y(j))$$
+$${\text{s.t. }}\ Y(j) = \left(\frac{P(j)}{P}\right)^{-\varepsilon} \cdot Y$$
+\\
+FOC yields
+$$P^*(j) = \frac{\varepsilon}{\varepsilon - 1}\cdot \Psi'(Y(j))$$
+\begin{itemize}
+    \item $M \equiv \frac{\varepsilon}{\varepsilon - 1}$, markup
+    \item $\varepsilon \uparrow \Rightarrow M \downarrow\ \because$ more competitive
+\end{itemize}
+
+Since the probability of setting price at any time $t$ is $1-\theta$ is the degree of flexibility, and $\theta$ is the degree of price rigidity, we have 2 results due to $\theta$
+\begin{enumerate}
+    \item Result 1: $E({\text{duration of a price}}) = \frac{1}{1-\theta}$
+    \begin{itemize}
+        \item $\theta = 0 \Rightarrow E(durat) = 1 \Rightarrow {\text{price stay 1 period only }} \because {\text{not rigid}}$
+        \item $\theta = 1 \Rightarrow E(durat) = \infty \Rightarrow {\text{price never change }} \because {\text{very rigid}}$\\
+    \end{itemize}
+
+    \item Result 2: Aggregate Price Dynamics (ie. how $P_t$, $\pi_t$ evolve over time)
+    \begin{itemize} 
+        \item $P_t^{1-\varepsilon} = (1-\theta)P_t^{*(1-\varepsilon)} + \theta P_{t-1}^{1-\varepsilon}$
+        \begin{itemize}
+            \item $1-\theta$ of the firms can set price while $\theta$ of the firms can only follow the price in the previous period. $P_t$ is the weighted average of these prices.
+            \item From this equation, we can find $P_t$ by solving for $P_t^{*(1-\varepsilon)}$ from the maximization problem. We want to know $P_t$ because it determines inflation.
+        \end{itemize}
+
+        \item $\pi_t = (1-\theta)(P_t^* - P_{t-1})$
+        \begin{itemize}
+            \item Inflation = fraction of adjusters ($1-\theta$) $\times$ the changes in prices that these firms make
+        \end{itemize}
+
+        \item $P_t = \theta P_{t-1} + (1-\theta)P_t^*$
+        \begin{itemize}
+            \item Price today is weighted by adjusters' and non-adjusters' average price.
+        \end{itemize}
+        $\therefore$ to find $P_t$, we already have $P_{t-1}$, now we need $P_t^*$
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsubsection{Dynamic Problem}
+For a firm who can reset price, it will do so to maximize the value of the firm
+
+$$\max_{P_t^* (i)}\ V_t(i) = E_t\left[\sum_{k=0}^\infty \Lambda_{t, t+k} \frac{\text{Profit}_{t+k}(i)}{P_{t+k}} \right]$$
+$$\Leftrightarrow \max_{\{P_t^*\}}\ \sum_{k=0}^\infty \theta^k E_t\left\{\Lambda_{t, t+k} \frac{1}{P_{t+k}}\left [P_t^* Y_{t+k|t} - \Psi(Y_{t+k|t})\right]\right\}$$
+
+\begin{itemize}
+    \item $Y_{t+k|t}$ is the demand conditional on price being last reset at time $t$ (if price is $P_t$ what is the demand?)
+    $$Y_{t+k|t} = \left(\frac{P_t^*}{P_{t+k}}\right)^{-\varepsilon} Y_{t+k}$$
+    \item $$\Lambda_{t, t+k} = \beta^k \frac{U_{c, t+k}}{U_{c,t}}$$
+    This is the stochastic discount factor.\\
+    \textcolor{ForestGreen}{Interpretation: $C_{t+k}$ units of consumption at $t+k$ is equivalent to $\Lambda_{t, t+k}\cdot C_{t+k}$ units of consumption today, in terms of today's utility $\beta^k \frac{U_{c, t+k}}{U_{c,t}}\cdot C_{t+k}$}
+\end{itemize}
+
+In summary, the firms maximize
+$$\max_{\{P_t^*\}}\ \sum_{k=0}^\infty \theta^k E_t\left\{\Lambda_{t, t+k} \frac{1}{P_{t+k}}\left [P_t^* Y_{t+k|t} - \Psi(Y_{t+k|t})\right]\right\}$$
+$$\text{s.t. }\ Y_{t+k|t} = \left(\frac{P_t^*}{P_{t+k}}\right)^{-\varepsilon} Y_{t+k}$$
+
+FOC:
+$$\sum_{k=0}^\infty \theta^k E_t\left\{\Lambda_{t, t+k} \frac{Y_{t+k|t}}{P_{t+k}}\left(P_t^* - \frac{\varepsilon}{\varepsilon - 1}\cdot \Psi_{t+k|t}'\right)\right\} = 0$$
+
+\textcolor{blue}{Discussion:}
+\textcolor{blue}{
+\begin{enumerate}
+    \item On average, $P_t^* = \frac{\varepsilon}{\varepsilon - 1}\Psi_{t+k|t}' \Rightarrow$ the average markup = $\frac{\varepsilon}{\varepsilon - 1}$\\
+    But actual markup $\neq \frac{\varepsilon}{\varepsilon - 1} \because \Psi_{t+k|t}' \neq \Psi_{t+k}'$
+    \item If $\theta = 0$ (flexible price), the FOC collapse to $P_t^* = \frac{\varepsilon}{\varepsilon - 1}\Psi_{t}'$\\
+\end{enumerate}
+}
+\\
+New notations:
+\begin{enumerate}
+    \item $$\text{real MC}_t = \frac{\Psi_t'}{P_t}$$
+    \item $$\text{Markup}_t = \frac{P_t}{\Psi_t'}$$
+    \item $$\therefore\ MC_t = \frac{1}{\text{Markup}_t}$$
+    $$MC = \frac{1}{M} \text{ in s.s.}$$
+    $$\Rightarrow\ mc = -\mu$$
+    \item $$\text{log}\Psi' = \psi_{t+k}\text{, log nominal MC}$$\\
+\end{enumerate}
+\\
+Take FOC, loglinearize it,
+$$P_t^* = -mc + (1-\beta\theta)\sum_{k=0}^\infty (\beta\theta)^kE_t(\psi_{t+k|t}),\text{ where }-mc = \mu,\ \psi_{t+k|t} = mc_{t+k|t} + p_{t+k}$$
+\\
+\textcolor{blue}{Discussion:}
+\textcolor{blue}{
+\begin{enumerate}
+    \item $P_t^*$ is desired markup ($\mu$) + weighted average of current and future nominal MC
+    \item The further away the future $\psi_{t+k}$ has a smaller weight $(\beta\theta)^k$
+    \item That weight $\downarrow$ faster if $\theta\downarrow\ \because$ more flexible prices
+\end{enumerate}}
+
+\subsubsection{NK Model}
+$$P_t^* = \mu + (1-\beta\theta)\sum_{k=0}^\infty(\beta\theta)^k E_t(\psi_{t+k|t})$$
+$$\Leftrightarrow P_t^* = \beta \theta E_t (P_{t+1}^*) + (1-\beta\theta)\hat{MC}_t + (1-\beta\theta)P_t$$
+\\
+{\color{ForestGreen}Implication: Marginal Cost $\uparrow \Rightarrow$ Markup $\downarrow \Rightarrow$ Price $\uparrow \Rightarrow$ inflation $\uparrow$}\\
+\\
+\textcolor{red}{Question: Why $P_{t+k}  = P_t$ affects $\psi_{t+k}$?\\
+Answer: Because, generally, price affects $Y$, $Y$ affects MC}\\
+\\
+From the NK Model above, we can derive that 
+$$\pi_t = \beta E_t(\pi_{t+1}) - \lambda\hat{\mu}_t\text{ , where } \lambda = \frac{(1-\theta)(1-\beta\theta)}{\theta}$$
+\\
+\textcolor{ForestGreen}{Interpretations:}
+\textcolor{ForestGreen}{
+\begin{enumerate}
+    \item $\pi_t\uparrow$ if $\hat{MC}_t \uparrow$ or $\hat{\mu} \downarrow$
+    \textcolor{ForestGreen}{
+    \begin{itemize}
+        \item Higher MC $\Rightarrow$ expensive cost $\Rightarrow$ firms increase price $\Rightarrow$ inflation increase
+        \item Markup less than s.s. markup $\Rightarrow$ firms increase price to earn more because current markup not enough to maximize profit $\Rightarrow$ inflation increase
+    \end{itemize}}
+    \item \textcolor{ForestGreen}{$\pi_t\uparrow$ if $E(\pi_{t+1})\uparrow$
+    \begin{itemize}
+        \item If firms expect $E(\pi_{t+1})\uparrow$, those who can reset the price today will anticipate by $P_t^*\uparrow$, because they worried that at $t+1$, they might not be able to increase price
+    \end{itemize}}
+    \item \textcolor{ForestGreen}{$\pi_t = -\lambda \sum_{k=0}^\infty \beta^k E_t(\hat{\mu}_t)$
+    \begin{itemize}
+        \item This is the NKPC after solving forward
+        \item ultimately, what matters for $\pi_t$ is markup
+    \end{itemize}}
+\end{enumerate}}
+
+
+\subsection{Equilibrium}
+Some conditions for equilibrium:
+\begin{enumerate}
+    \item Goods market clearing: 
+    $$y_t = c_t$$
+    \item Euler Equations:
+    $$y_t = E_t(y_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - \rho)$$
+    \item Labor Market Clearing (derived from first solving $y_t$ because NK model is demand driven):
+    $$n_t = \frac{1}{1-\alpha}(y_t - a_t) + d_t\text{ , where }d_t \equiv log\left[\int_0^1\left(\frac{P_t(i)}{P_t}\right)^{-\frac{\varepsilon}{1-\alpha}}di\right]$$
+    \begin{itemize}
+        \item $d_t$ is distortion in the market, some resources that is wasted and not going into production
+        \item It can be shown that $d_t \simeq 0 + \kappa\cdot \text{var}(p(i)) > 0$
+        \item $var(p(i))$ is the dispersion in price.
+        \item No dispersion means no firms can adjust price
+        \item price dispersion $\Rightarrow$ consumers buy cheaper goods $\Rightarrow$ $Y_t$ not maximised because we assume $C_t(i) = C_t(j)$ $\Rightarrow$ deviation from that creates distortion
+        \item Labor market clearing equation also implies $y_t = a_t + (1-\alpha)n_t - d_t$
+    \end{itemize}
+
+\end{enumerate}
+
+\textcolor{blue}{Discussion:}
+\textcolor{blue}{
+\begin{enumerate}
+    \item If price were flexible, $P_t(i) = P_t(j)\ \forall\ i, j, t$\\
+    $\Rightarrow\ var(p_t) = 0 \Rightarrow n_t = \frac{1}{1-\alpha}(y_t - a_t)$
+    \item In general, when prices are sticky, up to 1st order $d_t \simeq 0$\\
+    $\Rightarrow n_t \simeq \frac{1}{1-\alpha}(y_t - a_t)$
+\end{enumerate}
+}
+
+\subsubsection{Relationship between $\hat{MC}_t$ and $y_t$}
+An additional unit of output needs $\frac{1}{MPN_t}$ unit of labor. Firms pay this labour with $W_t$, thus, $\frac{W_t}{MPN_t}$ is the nominal marginal cost for a firm. To get real marginal cost, we have $\frac{W_t}{P_t} \frac{1}{MPN_t}$. This is how firm decides their labour demand. Therefore,  
+$$-\mu_t = mc_t = w_t - p_t - mpn_t$$
+It can be shown that
+$$mc_t = \left(\sigma + \frac{\varphi + \alpha}{1 - \alpha}\right)y_t - \frac{1+\varphi}{1-\alpha}a_t - log(1-\alpha)$$
+\\
+New notations:
+\begin{itemize}
+    \item $\Tilde{mc}_t = mc_t - mc_t^n$
+    \item $mc_t^n = -\mu_t^n = \frac{\varepsilon}{\varepsilon - 1} \equiv M$
+    \item $y_t^n$ = natural level of $y_t$, ie. the level of $y_t$ if price were flexible
+    \item Thus, the term with $\sim$ means the difference between itself and perfect competitive market level
+\end{itemize}
+\\
+It can be shown that $\hat{MC}_t = \left(\sigma + \frac{\varphi + \alpha}{1 - \alpha}\right)(y_t - y_t^n)$, \\
+{\color{ForestGreen} Interpretation: $\Tilde{y}_t \uparrow \Rightarrow \hat{MC}_t \uparrow$ due to diminishing marginal return.} Thus, 
+$$\pi_t = \beta E_t(\pi_{t+1}) + \kappa \Tilde{y}_t$$
+This is called the New Keynesian Phillips Curve.\\
+\\
+Now, rewrite Euler Equation with natural terms, we can get
+$$\Tilde{y}_t = E(\Tilde{y}_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - r_t^n)$$
+This is called the Dynamic IS Curve. \\
+{\color{ForestGreen}Interpretation:
+\begin{itemize}
+    \item $E_t(\pi_{t+1})\uparrow \Rightarrow P_t^* \uparrow$ because firms afraid next period they can't change the price.
+    \item $\Tilde{y}_t \uparrow \Rightarrow \pi_t \uparrow$ because $\hat{MC}_t \uparrow$, firms need to increase price to maintain at the same markup.
+\end{itemize}}
+
+\subsection{Solving NK Model}
+\begin{enumerate}
+    \item DIS: 
+$$\Tilde{y}_t = E(\Tilde{y}_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - r_t^n)$$
+DIS goes into AD, since it is housesholds' optimal basket
+    \item NKPC:
+$$\pi_t = \beta E_t(\pi_{t+1}) + \kappa \Tilde{y}_t$$
+NKPC goes into AS, because it is determined by firms
+    \item MP:
+$$i_t = \rho + \phi_\pi \pi_t + \phi_y \Tilde{y}_t + v_t$$
+MP goes into AD because interest rate affects demand (if no borrowing)
+\end{enumerate}
+\\
+To solve the model, we need to express endogenous variables in terms of exogenous variables. One method is use guess and verify. We assume some endogenous variables can be expressed by exogenous variables $v_t$ with some coefficients ($\theta_\pi,\theta_y$). If in the end these 2 coefficients can be expressed by exogenous variables, we have found a solution. 
+$$\Tilde{y}_t = \theta_y \cdot v_t \text{ , where }\theta_y < 0$$
+$$\pi_t = \theta_\pi \cdot v_t \text{ , where }\theta_\pi < 0$$
+However, this solution may not be unique. It has been shown that 
+$$\kappa (\phi_\pi - 1) + (1-\beta)\phi_y > 0 \Rightarrow \exists\ ! \text{ solution}$$
+The Taylor Principle ($\phi_\pi > 1$) can partly fulfill this condition.
+
+\subsubsection{Scenario 1: if there is a shock i.e. $v_t\uparrow$}
+\begin{itemize}
+    \item $\Tilde{y}_t \downarrow$ , $\pi_t \downarrow$
+    \begin{itemize}
+        \item $v_t\uparrow \Rightarrow i_t \uparrow \Rightarrow y_t\downarrow \rightarrow \Tilde{y}_t\downarrow \Rightarrow c_t\downarrow \Rightarrow \pi_t \downarrow$
+        \item $i_t$ is the indirect channel that affects $\Tilde{y}_t$ and $\pi_t$ from the shock of $v_t$
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Differences between NK Model and Classical Model}
+\begin{enumerate}
+    \item $$v_t\uparrow\ \Rightarrow i_t\uparrow \text{(direct), } \pi_t \downarrow \text{(indirect)}$$
+    \begin{itemize}
+        \item In NK model, $v_t \uparrow \Rightarrow i_t \uparrow$ because direct effect dominates. This is called the liquidity effect.
+        \item In classical model, there is no liquidity effect because indirect effect dominates since prices are fully flexible, i.e. $v_t \uparrow \Rightarrow i_t \downarrow$
+    \end{itemize}
+
+    \item $$y_t = E_t(y_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - \rho)$$
+    \begin{itemize}
+        \item In NK model, $r_t = i_t \uparrow - E_t(\pi_{t+1})\downarrow \Rightarrow r_t\uparrow \Rightarrow y_t \downarrow$
+        \begin{itemize}
+            \item nominal term $i_t$ affects real term $y_t$, hence this is the monetary non-neutrality
+        \end{itemize}
+
+        \item In classical model, $r_t = i_t\uparrow - E_t(\pi_{t+1})\downarrow$
+        \begin{itemize}
+            \item Both are affected. But since the price is fully flexible, $E_t(\pi_{t+1})$ can quickly fully adjust to offset the change in $i_t$ such that $r_t$ unchanged.
+            \item nominal term does not affect real term, this is called monetary neutrality.
+        \end{itemize}
+    \end{itemize}
+
+\end{enumerate}
+
+{\color{ForestGreen}Intuition: When $v_t > 0$,
+\begin{itemize}
+    \item $r_t \uparrow = i_t \uparrow\uparrow - E_t(\pi_{t+1})\downarrow$ due to price rigidity
+    \item From DIS, $r_t \uparrow \Rightarrow \Tilde{y}_t \downarrow$
+    \item $r_t\downarrow\Rightarrow$ return to savings $\uparrow \Rightarrow$ consumption $\downarrow = y_t\downarrow \Rightarrow$ output gap \< 0 $\Rightarrow$ inflation \< 0 (From NKPC)
+    \item $\pi_t \downarrow$ can be inferred from NKPC
+    \item $y_t\downarrow\Rightarrow n_t\downarrow = y_t\downarrow - a_t \Rightarrow$ real wage $\downarrow \Rightarrow (w_t - p_t) - mpn_t = mc\downarrow \Rightarrow P_t^* \downarrow$ (to get same markup that maximizes profit) $\Rightarrow \pi_t \downarrow$
+\end{itemize}
+}
+
+\subsubsection{Scenario 2: if there is a technological shock i.e. $a_t \uparrow$}
+\begin{enumerate}
+    \item $y_t^n = \psi_{ya}a_t\uparrow$ automatically
+    \item $\Tilde{y}_t = y_t \uparrow - y_t^n\uparrow\uparrow \Rightarrow \Tilde{y}_t \downarrow$
+    \begin{itemize}
+        \item $\uparrow y_t < \uparrow\uparrow y_t^n$ because of price rigidity
+        \item $a_t \uparrow \Rightarrow MC_t \downarrow \Rightarrow P_t \downarrow$ so that firms can achieve optimal markup at this price level. But price not entirely change to the new price.
+    \end{itemize}
+    \item $y_t = a_t \uparrow + n_t \Rightarrow y_t \uparrow$
+    \item $\pi_t \downarrow$ can be seen from NKPC since $\Tilde{y}_t < 0$
+    \begin{itemize}
+        \item \textcolor{ForestGreen}{Intuition: $a_t \uparrow \Rightarrow mc\ \downarrow \Rightarrow P_t^*\downarrow \Rightarrow \pi_t \downarrow$}
+    \end{itemize}
+    \item $n_t = y_t \uparrow - a_t \uparrow$ but $n_t \downarrow$
+    \begin{itemize}
+        \item $\frac{\partial n_t}{\partial a_t} < 0$ if $\sigma > 1$
+        \item i.e. the wealth effect dominates
+    \end{itemize}
+    \item $i_t = \rho + \phi_\pi \pi_t(<0) + \phi_y \Tilde{y}_t (<0) \Rightarrow i_t \downarrow$
+\end{enumerate}
+\\
+\textcolor{red}{Question: $a_t \uparrow$, CB reacts by $i_t \downarrow$, Is this a desirable property?}\\
+{\color{red}Answer: Yes. Because the cuts in interest rate helps stimulates AD and therefore helps to close output gap and deflation}\\
+\\
+\textcolor{red}{Question: Is there room for improvement?}\\
+{\color{red}Answer: Yes. CB can cut $i_t$ more by $\uparrow \phi_\pi$ and $\uparrow \phi_y$, so that the gap can be closed faster.} 
+
+\subsection{Summary}
+\begin{itemize}
+    \item When there is price rigidity, the competitiveness of the market has negative correlation with firms' markup
+    \item Current aggregate price level is weighted by adjusters' and non-adjusters' average price
+    \item Markup is inverse Marginal Cost (If prof called you at 3am, you had to answer this!!)
+    \item Marginal Cost $\uparrow \Rightarrow$ Markup $\downarrow \Rightarrow$ Price $\uparrow \Rightarrow$ inflation $\uparrow$
+    \item NKPC: $\pi_t = \beta E_t(\pi_{t+1}) + \lambda \hat{MC}_t = \beta E_t(\pi_{t+1}) + \kappa \Tilde{y}_t$. Note the relationship between inflation, marginal cost, and output gap.
+    \item DIS: $\Tilde{y}_t = E_t(\Tilde{y}_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - r_t^n)$
+    \item MP rule: $i_t = \rho + \phi_\pi \pi_t + \phi_y \Tilde{y}_t + v_t$
+    \item When there's an MP shock ($v_t\uparrow$), $i_t\uparrow$ due to liquidity effect, while in classical model, the shock causes $i_t\downarrow$
+    \item Because of liquidity effect and price rigidity, $r_t = i_t \uparrow\uparrow - E_t(\pi_{t+1})\downarrow \Rightarrow r_t \uparrow$. This shows the \textbf{Monetary non-neutrality}.
+\end{itemize}
+
+\pagebreak
+
+\section{Monetary Policy Design}
+\subsection{The Optimal Allocation}
+In a centralized economy, there's a social planner who can choose the optimal allocation, $(\pi_t, y_t)$, that maximize the output and HH's utility.\\
+
+\textbf{1st problem} of social planner: maximize aggregate consumption/output
+$$\max\ C_t \equiv \left[\int_0^1 C_t(i)^{1-\frac{1}{\varepsilon}}di\right]^{\frac{\varepsilon}{\varepsilon - 1}}$$
+
+FOC implies $C_t(i) = C_t(j)$, $N_t(i) = N_t(j)$, $Y_t(i) = Y_t(j)$ $\forall i,\ j$ $\longrightarrow (*)$ \\
+
+\textbf{2nd problem} of social planner: maximize HH's utility
+$$\max_{C_t, N_t}\ U(C_t, N_t)$$
+$$\text{s.t. }\ C_t(i) = A_t N_t(i)^{1-\alpha}$$
+
+FOC implies $-\frac{U_{n,t}}{U_{c,t}} = MPN_t \longrightarrow (**)$\\
+
+If $(*),\ (**)$ are satisfied, then the economy achieves the optimal allocation.\\
+
+\subsubsection{1st Distortion}
+$(**)$ can be violated due to price rigidity/monopolistic competition: 
+$$-\frac{U_{n,t}}{U_{c,t}} = \frac{MPN_t}{M} < MPN_t$$
+\\
+{\color{ForestGreen}Intuition 1: When prices are flexible, HH giving up 1 unit of consumption increase utility by $MPN_t$, which is the optimal wage offered by the firm. Now firms earn markup due because of the monopolistic competition nature of the market. Part of this markup is funded from labors' wage, so workers do not earn what they should have earn.}\\
+\\
+{\color{ForestGreen}Intuition 2: Market power $\Rightarrow$ firms charge $M>1 \Rightarrow$ over charge prices compared to perfect competition $\Rightarrow$ demand for goods $\downarrow \Rightarrow$ under production $\Rightarrow$ under hire $\Rightarrow$ unemployment}\\
+\\
+One can subsidize labor ($\tau$), with $\tau = \frac{1}{\varepsilon}$, to fix the 1st distortion.
+
+\subsubsection{2nd Distortion}
+$(*)$ can be violated due to price rigidity/monopolistic competition:
+\begin{align*}
+    P_t(i) &\neq P_t(j)\\
+    C_t(i) &\neq C_t(j)\\
+    N_t(i) &\neq N_t(j)\\
+    Y_t(i) &\neq Y_t(j)
+\end{align*}
+These distortions enter $d_t = log\left[\int_0^1(\frac{P_t(i)}{P_t})^{-\frac{\varepsilon}{\varepsilon-1}}\right]di$. CB's objective is to fix these distortions.\\
+\\
+Assumptions:
+\begin{enumerate}
+    \item $\tau^*$ is implemented $\Rightarrow y_t^n = y_t^e$
+    \item No inherited relative price distortions, $P_{t-1}(i) = P_{t-1}(j)\ \ \forall i, j$. i.e. no price distortion in the past.
+\end{enumerate}
+\\
+One solution is to set $\phi_\pi \rightarrow \infty$, if firms change $P_t(i)\Rightarrow\pi_t \uparrow,\ i_t\rightarrow \infty \Rightarrow$ profit loss of all firms $\Rightarrow$ no one want to change the price $\Rightarrow \pi_t = 0 \Rightarrow \Tilde{y}_t = 0 \Rightarrow y_t = y_t^n = y_t^e\ \because\tau^*$\\
+\\
+\textbf{Divine coincidence}: $(\pi_t = 0,\ \Tilde{y}_t = 0)$ is possible\\
+\\
+Example 1: When CB sets $i_t = r_t^n$, the divine coincidence achieved!!\\
+But the solution is not unique as $\kappa (\phi_\pi - 1) + (1-\beta)\phi_y = -\kappa < 0$ !!\\
+\\
+Example 2: $i_t = r_t^n + \phi_\pi \pi_t + \phi_y \Tilde{y}_t$, with $\phi_\pi,\ \phi_y$ are sufficiently large\\
+This satisfy $\kappa (\phi_\pi - 1) + (1-\beta)\phi_y > 0$\\
+\\
+However, $(r_t^n,\ \Tilde{y}_t)$ are not observable, one can use a simple rule:
+$$i_t = f(\text{Observables})$$
+$$\Leftrightarrow i_t = \phi_\pi \pi_t + \phi \hat{y}_t$$
+
+\subsection{Optimal MP in the presence of cost-push shocks}
+Recall, NKPC: $\pi_t = \beta E_t(\pi_{t+1}) + \kappa (y_t - y_t^n)$. $y_t^n$ is a good indicator when we think about welfare, because $y_t^n = y_t^e$ (due to $\tau^*$).\\
+\\
+\noindent Note that:\\
+$y_t^n$: output when price is flexible, monopolistic competition market can have this output level\\
+$y_t^e$: output when there is no welfare loss, monopolistic competition market cannot achieve this level unless they have $\tau^*$\\
+\\
+However, there are reasons that $y_t^n \neq y_t^e$, ie. even if price is flexible in monopolistic market, there is still welfare loss because:
+\begin{enumerate}
+    \item \textbf{no $\tau^*$}: at a given output level, firms need more labor because of the absence of $\tau^*$, HH are reluctant to work at the $MRS = MPN_t$ level.
+    \item desired price markup changes overtime, we need $\tau^*$ changing overtime
+    \item wage markup change overtime: firms need to give higher wage to workers (labor union).
+\end{enumerate}
+
+Define welfare relevant output gap (efficient output gap)
+$$x_t = y_t - y_t^e$$
+
+Rewriting NKPC,
+$$\pi_t = \beta E_t(\pi_{t+1}) + \kappa x_t + u_t$$
+$$u_t = \kappa (y_t^e - y_t^n) \neq 0$$
+\begin{itemize}
+    \item $u_t$ is so called the cost-push/markup shocks
+    \item divine coincidence $(\pi_t = 0, x_t = 0)$ no longer possible due to $u_t$
+    \item there is a tradeoff between $(\pi_t,x_t)$ facing by CB
+    \item CB now need to find out the optimal values of $(\pi_t,x_t)$
+\end{itemize}
+
+\subsubsection{Welfare Loss Function}
+Welfare loss is given by
+$$-E_0 \sum_{t=0}^\infty \beta^t \left(\frac{U_t - U}{U_c\cdot C}\right)$$
+$$\approx \frac{1}{2} E_0 \sum_{t=0}^\infty \beta^t \left[\left(\sigma + \frac{\varphi + \alpha}{1-\alpha}\right)\title{y}_t^2 + \frac{\varepsilon}{\lambda}\pi_t^2\right]$$
+\\
+Take one period from the above infinite sum, we have period welfare loss:
+$$\mathscr{L} = \frac{1}{2} \left[\left(\sigma + \frac{\varphi + \alpha}{1-\alpha}\right)\text{var}(\title{y}_t) + \frac{\varepsilon}{\lambda}\text{var}(\pi_t)\right]$$
+$$\Leftrightarrow \mathscr{L} = \pi_t^2 + v\cdot\Tilde{y}_t^2$$
+$$\Leftrightarrow \mathscr{L} = \pi_t^2 + v\cdot x_t^2$$
+\begin{itemize}
+    \item Loss $\uparrow$ if volatility of output gap $\uparrow$
+    \item Loss $\uparrow$ if inflation is too volatile
+\end{itemize}
+
+\subsubsection{CB's Problem}
+$$\min\ \ E_0 \sum_{t=0}^\infty [\pi_t^2 + v\cdot x_t^2]$$
+$$s.t.\ \ \pi_t = \beta E_t(\pi_{t+1}) + \kappa x_t + u_t,\ \ \forall t$$
+
+\paragraph{Discretionary Policy}
+\begin{itemize}
+    \item Minimize welfare loss period by period, $\mathscr{L} = \pi_t^2 + v\cdot x_t^2$
+    \item can only decide/influence on today's variables $\pi_t$, $x_t$, not future variables
+\end{itemize}
+
+$$\min\ \ \mathscr{L} = \pi_t^2 + v\cdot x_t^2$$
+$$\text{s.t. }\ \pi_t = \kappa x_t + z_t$$
+$$\text{where } z_t = u_t + \beta E_t(\pi_{t+1})$$
+
+FOC yields: 
+$$x_t = -\frac{\kappa}{v}\pi_t$$
+\\
+{\color{ForestGreen}Interpretation: Given a cost-push shock ($u_t$), the first best allocation ($\pi_t=0, x_t=0$) is impossible. Given this tradeoff ($\pi_t,x_t$), the CB is willing to decrease $x_t$ by $-\frac{\kappa}{v}$ for each percentage point increase in inflation}\\
+\\
+{\color{blue}Discussion: $v$
+\begin{enumerate}
+    \item $v=0 \Rightarrow \mathscr{L} = \pi_t^2$\\
+    the optimal MP is $\pi_t = 0 \ \ \forall\ t$\\
+    according to NKPC, $u$ can back $x_t$
+
+    \item $v=\infty \Rightarrow \mathscr{L} = \pi_t^2 + \infty\cdot x_t^2$\\
+    the optimal MP is $x_t = 0\ \ \forall\ t$\\
+    by plugging $x_t = 0$ into NKPC, we can backup the implied $\pi_t$
+
+    \item In general, the smaller is $v$, then the stabilization of $\pi_t$ is more important thant the stabilization of output gap $x_t$
+\end{enumerate}
+}
+
+\noindent Rewriting DIS:
+$$x_t = E_t(x_{t+1}) - \frac{1}{\sigma} (r_t - r_t^e)$$
+$$\text{where  }\ r_t^e = \rho + \sigma E_t(y_{t+1}^e - y_t^e)$$
+\\
+Continue to solve for optimal MP
+\begin{equation*}
+    \begin{cases}
+        x_t = -\frac{\kappa}{v}\pi_t\\
+        \pi_t = \kappa x_t + \beta E_t(\pi_{t+1}) + u_t
+    \end{cases}
+\end{equation*}
+\\
+We will have:
+$$\pi_t = \frac{v}{(1-\beta\rho_u)v + \kappa^2}\cdot u_t$$
+$$x_t = -\frac{\kappa}{(1-\beta\rho_u)v + \kappa^2}\cdot u_t$$
+\\
+{\color{ForestGreen}Interpretation: when there is a cost-push shock ($u_t \uparrow$), $\pi_t \uparrow$ and $x_t \downarrow$, meaning that generating a recession is optimal. This illustrate the tradeoff.}
+
+\paragraph{Commitment Policy}
+$$\min_{\{x_t\}_{t=0}^\infty, \{\pi_t\}_{t=0}^\infty}\ \ \sum_{t=0}^\infty \beta^t [\pi_t^2 + v\cdot x_t^2]$$
+$$\text{s.t.  }\ \pi_t = \beta E_t (\pi_{t+1}) + \kappa x_t + u_t,\ \ \forall t$$
+\\
+By solving forward, we get
+$$\pi_t = \kappa x_t +\kappa \sum_{j=0}^\infty \beta^j E_t(x_{t+j}) + \frac{1}{1-\beta\rho_u}\cdot u_t$$
+\\
+{\color{ForestGreen}Interpretation: CB can balance tradeoff between $t$ and any $t+j$  period.}\\
+\\
+Commitment MP always dominates discretionary MP in terms of welfare because commitment MP is minimizing entire past and future of welfare loss.\\
+
+\subsection{Summary}
+\begin{itemize}
+    \item In a centralized economy, social planner can achieve optimal allocation ($\pi_t, y_t$) that maximize HH's utility and output level
+    \item In decentralized/price-rigid economy, some actions are needed to fix 2 distortions due to price rigidity, in order to reach the divine coincidence
+    \item In practice, there exists cost-push shock that prevent the economy to reach the divine coincidence
+    \item The cost-push shocks bring tradeoffs between inflation and efficient output gap
+    \item CB has to choose ($\pi_t, x_t$) such that the welfare loss is minimized
+    \item CB can implement either discretionary MP or commitment MP to address cost-push shocks
+\end{itemize}
+
+\pagebreak
+
+
+\section{Criticism and Defenses of the NK Model}
+Three equations of NK model:
+$$\Tilde{y} = E_t(\Tilde{y}_{t+1}) - \frac{1}{\sigma}(i_t - E_t(\pi_{t+1}) - r_t^n)$$
+$$\pi_t = \beta E_t(\pi_{t+1}) + \kappa \Tilde{y}_t$$
+$$i_t = \rho + \phi_\pi \pi_t + \phi_y \hat{y}_t + v_t$$
+
+\subsection{The Missing Disinflation}
+\noindent According to NKPC, \\
+$$y\downarrow \Rightarrow mc\downarrow \text{($mc$ is a function of $y$)}\Rightarrow M\uparrow \Rightarrow p\downarrow \text{(to maintain at the optimal value of $M$)} \Rightarrow \pi \downarrow$$
+
+\noindent However, after the 2008 financial crisis, there is no disinflation when an economy is in recession, from the data. The slope of the NKPC seems to be zero.
+
+\subsubsection{Explanation 1: The slope of NKPC is becoming flatter}
+Note that the slope of NKPC is given by
+$$\kappa = \frac{(1-\theta)(1-\beta\theta)}{\theta}\frac{1-\alpha}{1-\alpha + \alpha \varepsilon}\left(\sigma + \frac{\varphi + \alpha}{1-\alpha}\right)$$
+
+\begin{itemize}
+    \item $\beta$: Time preference
+    \item $\sigma$: Intertemporal elasticity of substitution
+    \item $\varphi$: Labor supply elasticity
+\end{itemize}
+
+\noindent We do not have good reasons why the above parameters have changed over time. What we can possibly explain are:
+
+\begin{itemize}
+    \item $1-\alpha$: Labor share, has been declining by 13\% between 2000 and 2013 $\Rightarrow$ derease $\kappa$ by around 15\%
+    \item $\varepsilon$: measures firms's profit $\left(\frac{1}{1-\varepsilon}\right)$, has risen from 6\% to 9\% after 2005 $\Rightarrow$ 20-30\% reduction in $\varepsilon \Rightarrow$ 20-30\% increase in $\kappa$
+    \item $\theta$: a measure of frequency of price change $\left(\frac{1}{1-\theta}\right)$, has been somewhat decreasing overtime $\Rightarrow\kappa$ falls by around 50\% 
+\end{itemize}
+
+\subsubsection{Explanation 2: The right expected inflation}
+By running the following regression:
+$$\pi_t = \beta_1 E^{MSC}(\pi_{t+1}) + \beta_2 E^{SPF}(\pi_{t+1}) + \kappa x_t + e_t$$
+We can find that $\beta_1$ is significantly positive but not $\beta_2$. This indicates that NKPC is alive when we use consumer expectation rather than professionals' expectation. \\
+\\
+{\color{red}Question: NKPC comes from price rigidity, which is a firms' problem, why consumers' expectations bother?\\
+Possible answer: Consumers are closer to firms compared to professional bankers and investors. Those who are running firms are also consumers at the same time.}
+
+\subsection{The intermediate NKPC is alive}
+Recall, the NKPC is derived in 2 steps:
+\begin{enumerate}
+    \item Step 1:
+    $$\pi_t = \beta E_t (\pi_{t+1}) + \lambda \hat{mc}_t$$
+    Assumptions:
+    \begin{itemize}
+        \item staggered price setting a la Calvo (a probability that firms can reset price)
+        \item optimal price setting by monopolistic competitive firms
+        \item constant frictionless desired markup $\mu$\\
+    \end{itemize}
+
+    \item Step2: 
+    $$\lambda \hat{mc}_t = \kappa \tilde{y}_t$$
+    $$\pi_t = \beta E_t (\pi_{t+1}) + \kappa \tilde{y}_t$$
+    Assumptions (strong):
+    \begin{itemize}
+        \item all output is consumed
+        \item perfect competition in labor market
+        \begin{itemize}
+            \item HH believes that they can sell as much labor as they want
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\noindent By using lagged economic indicators as IV (independent of the error term because of rational expectation), we can estimate the slope of the intermediate NKPC from the below regression specification.
+
+$$\pi_t = \beta \pi_{t+1} + \lambda \hat{mc}_t - \underbrace{\beta (\pi_{t+1} - E_t(\pi_{t+1}))}_{e_{t+1}}$$
+
+\noindent It turns out that when estimating the intermediate NKPC, $\lambda$ is positive, which aligns with NKPC. However, the author of this paper (Gali and Gertler (1999)) is subject to weak instrument problem.
+
+\subsection{The professionals don't know ECON101}
+The inflations and output gaps observed are the equilibrium of AS and AD curve, which moves dynamically. In order to examine the slope of NKPC (AS), we need to fix AS and use the movement of AD to draw out the AS curve.\\
+
+\noindent How can we achieve that? there are 2 equations for the problem
+$$\text{MP: } \pi_t = -\frac{\lambda}{\kappa}x_t + \varepsilon_t^m$$
+$$\text{NKPC: } \pi_t = \kappa x_t + u_t$$
+
+\noindent We can obtain the following, which the solutions are a linear combination between supply shock and demand shock:
+$$\pi_t = \theta_1 u_t + \theta_2 \varepsilon_t^m$$
+$$x_t = \theta_3 u_t + \theta_4 \varepsilon_t^m$$
+
+\noindent ``To examine the slope of NKPC (AS), we need to fix AS and use the movement of AD to draw out the AS curve".\\
+\noindent We can use MP shocks (demand shocks $\varepsilon_t^m$) as IV, then we can eliminate supply shock and obtain the NKPC.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{nkpc.png}
+    \caption{Drawing NKPC by moving AD}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Summary}
+\begin{itemize}
+    \item The slope of NKPC is becoming flatter
+    \item The right expectation (consumers' expectation) need to be used
+    \item The intermediate NKPC is alive because the final NKPC needs strong assumptions
+    \item What we observe is the results of AD AS, not solely NKPC.
+\end{itemize}
+
+\pagebreak
+
+\section{AD \& AS}
+Recall:
+$$y_t = E_t(y_{t+1}) - (i_t + E_t(\pi_{t+1}) - \rho) + d_t$$
+$$i_t = \rho + \phi_\pi \pi_t + v_t$$
+
+\noindent Combining both equations, we get
+$$AD:\ y_t = E_t(y_{t+1}) + E_t (\pi_{t+1}) - \phi_\pi \pi_t - v_t + d_t$$
+where $d_t$ and $v_t$ are demand shock and MP shock respectively.\\
+{\centering\includegraphics[width=6cm, height=4cm]{AD.jpg}\par}
+
+\noindent Recall NKPC, \\
+$$AS:\ \pi_t = \beta E_t(\pi_{t+1}) + \kappa (y_t - y_t^n) + u_t$$
+{\centering\includegraphics[width=6cm, height=4cm]{AS.jpg}\par}
+
+\subsection{Lesson 1: Demand Shock}
+There are 2 demand shocks component in AD, $v_t$ and $d_t$. Let's talk about $v_t$ here. \\
+\\
+If $v_t < 0$ or a negative demand/MP shock, $i_t\downarrow$. The mechanism is 
+$$v_t < 0 \Rightarrow i_t \downarrow\downarrow \Rightarrow r_t \downarrow \Rightarrow AD\uparrow \Rightarrow y_t \uparrow$$
+\noindent How $r_t$ affects $y_t$ is through mechanism below:
+$$r_t \downarrow \Rightarrow c_t \uparrow \Rightarrow mc_t \uparrow \Rightarrow \mu_t \downarrow \Rightarrow p_t\uparrow \Rightarrow \pi_t\uparrow$$
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{lesson1.png}
+    \caption{AD-AS Curve given $v_t < 0$}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The above mechanism causes AD to shift right.\\
+\\
+In classical model, $v_t < 0 \Rightarrow \Bar{y}_t$ because prices are fully flexible, $E_t(\pi_{t+1})$ will fully offset changes in $i_t$ s.t.  $\Bar{r}_t$.
+
+
+\subsection{Lesson 2: Productivity/Supply Shock}
+$$a_t \uparrow \Rightarrow mc_t \downarrow \Rightarrow \pi_t \downarrow\Rightarrow i_t \downarrow\downarrow \Rightarrow r_t \downarrow \Rightarrow y_t \uparrow$$
+\noindent Note the roles of firms, CB, and consumers in above mechanism.\\
+\\
+From the graph below, $\tilde{y}_1 = y_1 - y_n < 0$. This is because in response to $a_t\uparrow$, $p_t$ needs to go down but due to rigidity, $p_t\downarrow$ insufficiently. The output should have been larger and the disinflation should have been lower.\\
+\\
+Is there a way to make the output level be at $y_n'$? \\
+\\
+Yes! Since $v_t$ is exogenous, we cannot shift the AD curve, but we can rotate it. By setting a larger $\phi_\pi$, the slope of AD is becoming flatter. Therefore, $y_1$ will become larger ($y_1'$) and disinflation become lower ($\pi_1'$).\\
+\\
+If $\phi_\pi \rightarrow \infty$, then the slope of AD will become completely flat.\\
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{lesson2.png}
+    \caption{AD-AS Curve given $y^n \uparrow$}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{lesson2b.png}
+    \caption{The Extreme Policy}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Since in AD, we have
+$$y_t = E_t(y_{t+1}) - \phi_\pi \pi_t + E_t (\pi_{t+1})$$
+$$\phi_\pi \uparrow\uparrow \Rightarrow i_t \downarrow \downarrow \downarrow \Rightarrow y_t \uparrow\uparrow\uparrow \Rightarrow \Tilde{y}_t \downarrow\downarrow$$
+
+
+
+
+
+\subsection{Lesson 3: Cost-push Shock}
+Recall:
+$$\pi_t = \beta E_t(\pi_{t+1}) + \kappa (y_t - y_t^e) + u_t$$
+
+\noindent Where $u_t$ is the cost-push shock. If there is a positive cost-push shock,
+$$u_t \uparrow \Rightarrow \pi_t \uparrow \Rightarrow i_t \uparrow\uparrow \Rightarrow r_t\uparrow \Rightarrow c_t \downarrow \Rightarrow y_t \downarrow \text{(recession)}$$
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{lesson3.png}
+    \caption{AD-AS Curve given $y^n\uparrow$}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Alternative Policy scenarios:
+\begin{itemize}
+    \item $\phi_\pi \uparrow \Rightarrow \text{flatter AD}\Rightarrow y_1 < y' \text{(worse recession, bad), lower inflation (good)}$
+    
+    \item $\phi_\pi \downarrow \Rightarrow \text{steeper AD}\Rightarrow y_2 > y' \text{(smaller recession, good), higher inflation (bad)}$
+\end{itemize}
+
+\noindent Ultimately, the the region between $\phi_\pi \rightarrow \infty$ and $\phi_\pi = 0$ can achieved by FOMC depending on $\mathscr{L}$\\
+\\
+Recall that CB's problem is 
+$$\min\ \mathscr{L} = \pi_t^2 + \lambda \tilde{y}_t^2$$
+
+\begin{enumerate}
+    \item Case 1: $\lambda = 0 \Rightarrow \mathscr{L} = \pi_t^2 \Rightarrow$ FOMC pick $\pi_t = 0$, i.e. $\phi_\pi = \infty$
+    \item Case 2: $\lambda = \infty \Rightarrow \mathscr{L} = \pi_t^2 + \infty \cdot \Tilde{y}_t^2 \Rightarrow \mathscr{L} = \tilde{y}_t^2 \Rightarrow$ FOMC pick $\tilde{y}_t = 0$, i.e. strict output gap target
+\end{enumerate}
+
+
+\subsection{Lesson 4: The Role of Expectation}
+
+$$AD:\ y_t = {\color{red}E_t(y_{t+1})} + {\color{red}E_t (\pi_{t+1})} - \phi_\pi \pi_t - v_t + d_t$$
+$$AS:\ \pi_t = \beta {\color{red}E_t(\pi_{t+1})} + \kappa (y_t - y_t^n) + u_t$$
+
+Suppose that there's an announcement that the Olympic games will be held in this economy at $t+1$, then
+$$AD_{t+1} \Rightarrow y_{t+1}\uparrow,\ \pi_{t+1}\uparrow \Rightarrow E_t(y_{t+1})\uparrow,\ E_t(\pi_{t+1})\uparrow$$
+$$AD_t\uparrow,\ AS_t\uparrow \Rightarrow y_t \uparrow,\ \pi_t\uparrow \text{ (demand shock)}$$
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{lesson4.png}
+    \caption{The Effect of Expectation}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsection{Lesson 5: Zero Lower Bound}
+Zero lower bound means CB is setting the nominal interest rate to 0, i.e. $i_t = 0$. Then, CB is not reacting to any inflation in the economy. Hence, the \textbf{AD is a vertical line}. AD becomes:
+
+$$y_t = E_t(y_{t+1}) + E_t(\pi_{t+1}) + \rho + d_t$$
+
+Then if $d_t < 0$ (negative demand shock), $y_{1, ZLB} < y_1$ (bigger recession than normal time) and $\pi_{1,ZLB} < \pi_1$ (bigger deflation than normal time).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{lesson5.png}
+    \caption{Demand Shock under ZLB}
+    \label{fig:enter-label}
+\end{figure}
+
+{\color{ForestGreen}\noindent Intuition: In normal time, the conventional MP (Taylor rule) is active, it marks as counter-cyclical policy.}\\
+
+\noindent To mitigate the risk of hitting ZLB, the economy should raise $i^{ss}$ because 
+$$i^{ss} = r^{ss} + \pi^{ss}$$
+\noindent where CB can only raise $\pi^{ss}$ as no one knows about the real rate.
+
+
+\subsection{Lesson 6: Forward Guidance (Commitment MP)}
+
+Consider when there is ZLB in the economy and there is a negative demand shock $d_t < 0$, FG can mitigate the recession today.
+
+$$AD_{t+1}\uparrow \Rightarrow y_{t+1}\uparrow,\ \pi_{t+1}\uparrow\Rightarrow E_t(y_{t+1})\uparrow,\ E_t(\pi_{t+1})\uparrow \Rightarrow AD_t\text{ shifts right},\  AS_t \text{ shifts up}$$
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\linewidth]{lesson6.png}
+    \caption{Forward Guidance under ZLB}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Hence, $y_{1, FG} > y_{1, ZLB}$ (smaller recession) and $\pi_{1, FG} > \pi_{1, ZLB}$ (smaller deflation).\\
+
+\noindent For forward guidance to work, the CB need to have credibility.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
